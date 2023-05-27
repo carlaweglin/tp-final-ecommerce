@@ -1,4 +1,4 @@
-import { VStack } from '@chakra-ui/react'
+import {Stack, VStack } from '@chakra-ui/react'
 import { Footer } from '../components/Footer'
 import { Header } from '../components/Header'
 
@@ -6,10 +6,10 @@ export function AppLayout({ children }) {
   return (
     <VStack>
       <Header />
-      <main>
+      <Stack h='75vh' bg='lightblue' w='100%' textAlign='center'>
         {children}
-      </main>
-      <Footer/>
+      </Stack>
+      <Footer />
     </VStack>
   )
 }

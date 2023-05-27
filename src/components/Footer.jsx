@@ -1,14 +1,11 @@
-import {Heading, Stack } from '@chakra-ui/react'
+import { Heading, Stack } from '@chakra-ui/react'
 
 export function Footer() {
   return (
-    <>
-      <Stack w="full" textAlign="center" bg="pink">
-        <Heading as="h1" p={10}>
-          Footer
-        </Heading>
-      </Stack>
-     
-    </>
+    <Stack w="full" textAlign="center" bg="pink" h="10vh">
+      <Heading as="h2" p={5}>
+        Footer
+      </Heading>
+    </Stack>
   )
 }
