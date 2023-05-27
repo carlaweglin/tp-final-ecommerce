@@ -1,9 +1,10 @@
 import { Box, Button, Heading, SimpleGrid, Stack, Text } from '@chakra-ui/react'
+import { ProductCard } from '../components/ProductCard'
 
 export function Home() {
   return (
-    <Stack alignItems="center" pt='50px'>
-      <Box bg="rgb(242, 206, 130)" w="70%" color="white" textAlign="center">
+    <Stack alignItems="center" w='80%' pb='20px'>
+      <Box bg="rgb(242, 206, 130)" w="70%" color="white" textAlign="center" p='20px'>
         <Heading fontSize="30px">
           Proyecto final ADAITW, un ecommerce para aprender y aplicar
           tecnologías web.
@@ -18,11 +19,13 @@ export function Home() {
         <Text fontSize="3xl">Recientes</Text>
       </Box>
       <Box w="70%">
-        <SimpleGrid columns={[2, null, 3]} spacing="40px">
-          <Box bg="tomato" height="80px">Producto 1</Box>
-          <Box bg="tomato" height="80px">Producto 2</Box>
-          <Box bg="tomato" height="80px">Producto 3</Box>
+      <Stack w="100%" alignItems='center' >
+        <SimpleGrid columns={[2, null, 3]} gap={10} >
+          <ProductCard/>
+          <ProductCard/>
+          <ProductCard/>
         </SimpleGrid>
+      </Stack>
       </Box>
     </Stack>
   )

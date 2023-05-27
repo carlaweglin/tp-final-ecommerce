@@ -6,7 +6,7 @@ export function AppLayout({ children }) {
   return (
     <VStack>
       <Header />
-      <Stack h='70vh' w='100%' alignItems='center' pt={50}>
+      <Stack minH='70vh' w='100%' alignItems='center' pt={50}>
         {children}
       </Stack>
       <Footer />
