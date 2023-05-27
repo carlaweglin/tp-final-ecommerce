@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react'
 import { ProductCard } from '../components/ProductCard'
 
-export function Products(params) {
+export function Products() {
   return (
     <VStack alignItems='center' justifyContent='space-around' w='70%'>
       <Stack mb='20px'>
