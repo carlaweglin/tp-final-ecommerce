@@ -1,4 +1,4 @@
-import { HStack, Link } from '@chakra-ui/react'
+import { Button, HStack, Link } from '@chakra-ui/react'
 
 import { Link as RouterLink } from 'react-router-dom'
 
@@ -6,17 +6,17 @@ export function NavApp() {
   return (
     <HStack w="100%" justifyContent='center' gap={100}>
       <Link as={RouterLink} to="/">
-        Inicio
+      <Button colorScheme='blackAlpha'>Inicio</Button>
       </Link>
       <Link as={RouterLink} to="/products">
-        Productos
+      <Button colorScheme='blackAlpha'>Productos</Button>
       </Link>
 
       <Link as={RouterLink} to="/cart">
-        Carrito
+      <Button colorScheme='blackAlpha'>Carrito</Button>
       </Link>
       <Link as={RouterLink} to="/login">
-        Iniciar Sesion
+      <Button colorScheme='blackAlpha'>Iniciar Sesion</Button>
       </Link>
     </HStack>
   )

@@ -2,8 +2,8 @@ import { Box, Button, Heading, SimpleGrid, Stack, Text } from '@chakra-ui/react'
 
 export function Home() {
   return (
-    <Stack alignItems="center">
-      <Box bg="tomato" w="70%" p={10} color="white" textAlign="center">
+    <Stack alignItems="center" pt='50px'>
+      <Box bg="rgb(242, 206, 130)" w="70%" p={10} color="white" textAlign="center">
         <Heading fontSize="30px">
           Proyecto final ADAITW, un ecommerce para aprender y aplicar
           tecnologías web.
