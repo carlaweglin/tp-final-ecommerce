@@ -13,7 +13,9 @@ import {
 } from '@chakra-ui/react'
 import { Link as RouterLink } from 'react-router-dom'
 
-export function ProductCard() {
+export function ProductCard(product) {
+
+  console.log(product.name);
   return (
     <Card maxW="350px">
       <CardBody>
@@ -23,7 +25,7 @@ export function ProductCard() {
           borderRadius="lg"
         />
         <Stack mt="6" spacing="3">
-          <Heading size="md">Producto</Heading>
+          <Heading size="md">{product.name}</Heading>
 
           <Text color="blue.600" fontSize="2xl">
             $450
