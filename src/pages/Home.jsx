@@ -18,7 +18,7 @@ export function Home() {
     getData()
   }, [])
 
- console.log(products);
+ 
 
   return (
     <Stack alignItems="center" w="80%" pb="20px">

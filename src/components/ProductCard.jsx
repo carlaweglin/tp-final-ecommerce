@@ -13,22 +13,24 @@ import {
 } from '@chakra-ui/react'
 import { Link as RouterLink } from 'react-router-dom'
 
-export function ProductCard(product) {
+export function ProductCard({product}) {
 
-  console.log(product.name);
+  const {name,image,description,price,stock} = product;
+
   return (
     <Card maxW="350px">
       <CardBody>
         <Image
-          src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+          src={image}
           alt="producto"
           borderRadius="lg"
         />
         <Stack mt="6" spacing="3">
-          <Heading size="md">{product.name}</Heading>
+          <Heading size="md">{name}</Heading>
+          <Text size="sm">{description}</Text>
 
           <Text color="blue.600" fontSize="2xl">
-            $450
+            ${price}
           </Text>
         </Stack>
       </CardBody>
