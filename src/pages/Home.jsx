@@ -1,4 +1,12 @@
-import { Box, Button, Heading, SimpleGrid, Stack, Text } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Heading,
+  SimpleGrid,
+  Spinner,
+  Stack,
+  Text,
+} from '@chakra-ui/react'
 import { ProductCard } from '../components/ProductCard'
 import { useEffect, useState } from 'react'
 import { getAllProducts } from '../services/products'
@@ -6,19 +14,22 @@ import { getAllProducts } from '../services/products'
 export function Home() {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     const getData = async () => {
-      const products = await getAllProducts()
-      setProducts(products)
-      setLoading(false)
+      try {
+        const products = await getAllProducts()
+        setProducts(products)
+      } catch (error) {
+        setError(true)
+      } finally {
+        setLoading(false)
+      }
     }
 
     getData()
   }, [])
-
- 
 
   return (
     <Stack alignItems="center" w="80%" pb="20px">
@@ -44,9 +55,21 @@ export function Home() {
       </Box>
       <Box w="70%">
         <Stack w="100%" alignItems="center">
+          {/* ver si funciona msj de error */}
+          {error && (
+            <div>
+              <h1>Error al mostrar los productos.</h1>
+            </div>
+          )}
+          {!loading && !products.length && (
+            <div>
+              <h1>No hay productos para mostrar.</h1>
+            </div>
+          )}
+          {loading && <Spinner size="xl" />}
           <SimpleGrid columns={[2, null, 3]} gap={10}>
             {products.map((product) => (
-              <ProductCard product={product} key={product.id}/>
+              <ProductCard product={product} key={product.id} />
             ))}
           </SimpleGrid>
         </Stack>

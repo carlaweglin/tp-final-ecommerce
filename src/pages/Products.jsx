@@ -1,5 +1,4 @@
 import {
-  Box,
   FormControl,
   FormLabel,
   HStack,
@@ -12,6 +11,7 @@ import {
   NumberInputStepper,
   Select,
   SimpleGrid,
+  Spinner,
   Stack,
   VStack,
 } from '@chakra-ui/react'
@@ -26,9 +26,14 @@ export function Products() {
 
   useEffect(() => {
     const getData = async () => {
-      const products = await getAllProducts()
-      setProducts(products)
-      setLoading(false)
+      try {
+        const products = await getAllProducts()
+        setProducts(products)
+      } catch (error) {
+        setLoading(false)
+      } finally {
+        setLoading(false)
+      }
     }
 
     getData()
@@ -64,6 +69,17 @@ export function Products() {
         </FormControl>
       </HStack>
       <Stack w="100%" pt="50px" alignItems="center">
+        {error && (
+          <div>
+            <h1>Error al mostrar los productos.</h1>
+          </div>
+        )}
+        {!loading && !products.length && (
+          <div>
+            <h1>No hay productos para mostrar.</h1>
+          </div>
+        )}
+        {loading && <Spinner size="xl" />}
         <SimpleGrid columns={[2, null, 3]} gap={12}>
           {products.map((product) => (
             <ProductCard product={product} key={product.id} />
