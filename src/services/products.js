@@ -1,4 +1,4 @@
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, query, where, doc, getDoc } from 'firebase/firestore'
 import { db } from '../firebase/config'
 
 export const getAllProducts = async () => {
@@ -11,8 +11,14 @@ export const getAllProducts = async () => {
       ...doc.data(),
       id: doc.id,
     })
-    
   })
 
-  return products;
+  return products
+}
+
+export const getProductById = async (id) => {
+  const docRef = doc(db, "products", id);
+  const docSnap = await getDoc(docRef);
+
+  return docSnap.data()
 }

@@ -14,8 +14,8 @@ import {
 import { Link as RouterLink } from 'react-router-dom'
 
 export function ProductCard({product}) {
-
-  const {name,image,description,price,stock} = product;
+  
+  const {name,image,description,price,id} = product;
 
   return (
     <Card maxW="350px">
@@ -37,7 +37,7 @@ export function ProductCard({product}) {
       <Divider />
       <CardFooter>
         <ButtonGroup spacing="2">
-          <Link as={RouterLink} to="/productDetails">
+          <Link as={RouterLink} to={`/products/${id}`}>
             <Button variant="solid" colorScheme="blue">
               Ver detalles
             </Button>

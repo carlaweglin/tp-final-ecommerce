@@ -10,9 +10,33 @@ import {
   Text,
   Link,
 } from '@chakra-ui/react'
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink, useParams } from 'react-router-dom'
+import { getProductById } from '../services/products'
+import { useEffect, useState } from 'react'
 
 export function ProductDetails() {
+  const { id } = useParams()
+
+  const [product, setProduct] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const product = await getProductById(id)
+        setProduct(product)
+        console.log(product);
+      } catch (error) {
+        setError(true)
+      } finally {
+        setLoading(false)
+      }
+    }
+    
+    getData()
+  }, [])
+
   return (
     <HStack w="80%" justifyContent="center" pt="5%">
       <Card
@@ -23,16 +47,16 @@ export function ProductDetails() {
         <Image
           objectFit="cover"
           maxW={{ base: '100%', sm: '200px', lg: '400px' }}
-          src="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
+          src={product.image}
           alt="Caffe Latte"
         />
 
         <Stack>
           <CardBody>
-            <Heading size="lg">Nombre Producto</Heading>
+            <Heading size="lg">{product.name}</Heading>
 
-            <Text p="4">Descripción</Text>
-            <Text p="3">Precio</Text>
+            <Text p="4">{product.description}</Text>
+            <Text p="3">${product.price}</Text>
           </CardBody>
 
           <CardFooter gap={5}>
