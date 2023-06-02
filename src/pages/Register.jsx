@@ -32,7 +32,7 @@ export function Register() {
       </Button>
       <FormControl>
         <FormLabel>Email</FormLabel>
-        <Input type="email" mb="15px" placeholder="Ingrese su email" />
+        <Input type="email" mb="15px" placeholder="Ingrese su email" id='email'/>
         <FormLabel>Contraseña</FormLabel>
         <InputGroup size="md">
           <Input
