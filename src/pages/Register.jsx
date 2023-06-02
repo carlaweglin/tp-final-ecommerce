@@ -15,16 +15,15 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { FcGoogle } from 'react-icons/fc'
 import { Link as RouterLink } from 'react-router-dom'
+import { registerUserWithEmailAndPassword } from '../services/auth'
 
 export function Register() {
   const { register, handleSubmit, formState } = useForm()
 
   const { errors } = formState
 
-  console.log(errors);
-
   const login = (data) => {
-    console.log(data)
+    registerUserWithEmailAndPassword(data)
   }
 
   {
@@ -32,6 +31,10 @@ export function Register() {
   }
   const [show, setShow] = useState(false)
   const handleClick = () => setShow(!show)
+
+  {
+    /*Ejecutamos funcion para crear usuario*/
+  }
 
   return (
     <Stack alignItems="left" minW="20%" pt="70px" gap={7}>
@@ -47,7 +50,6 @@ export function Register() {
           <FormLabel>Email</FormLabel>
           <Input
             type="text"
-            
             placeholder="Ingrese su email"
             id="email"
             {...register('email', {
@@ -64,7 +66,6 @@ export function Register() {
           <FormLabel mt="15px">Contraseña</FormLabel>
           <InputGroup size="md">
             <Input
-              
               type={show ? 'text' : 'password'}
               placeholder="Ingrese su contraseña"
               id="password"
@@ -85,7 +86,9 @@ export function Register() {
           <Text as="i" color="red">
             {errors.password?.message}
           </Text>
-          <Button width="100%" type="submit" mt="30px">Crear cuenta</Button>
+          <Button width="100%" type="submit" mt="30px">
+            Crear cuenta
+          </Button>
         </FormControl>
       </form>
       <Link as={RouterLink} to="/login" textAlign="center">
