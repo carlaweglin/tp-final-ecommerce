@@ -9,7 +9,6 @@ import {
   InputGroup,
   InputRightElement,
   Icon,
-  FormErrorMessage,
   Text,
 } from '@chakra-ui/react'
 import { useState } from 'react'
