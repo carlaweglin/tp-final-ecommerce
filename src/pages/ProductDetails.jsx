@@ -9,6 +9,7 @@ import {
   Stack,
   Text,
   Link,
+  Spinner,
 } from '@chakra-ui/react'
 import { Link as RouterLink, useParams } from 'react-router-dom'
 import { getProductById } from '../services/products'
@@ -26,7 +27,6 @@ export function ProductDetails() {
       try {
         const product = await getProductById(id)
         setProduct(product)
-        console.log(product);
       } catch (error) {
         setError(true)
       } finally {
@@ -52,6 +52,12 @@ export function ProductDetails() {
         />
 
         <Stack>
+        {error && (
+            <div>
+              <h1>Error al mostrar los productos.</h1>
+            </div>
+          )}
+          {loading && <Spinner size="xl" />}
           <CardBody>
             <Heading size="lg">{product.name}</Heading>
 

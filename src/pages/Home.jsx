@@ -15,7 +15,6 @@ export function Home() {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
-  console.log("productos:",products);
   useEffect(() => {
     const getData = async () => {
       try {
@@ -55,7 +54,6 @@ export function Home() {
       </Box>
       <Box w="70%">
         <Stack w="100%" alignItems="center">
-          {/* ver si funciona msj de error */}
           {error && (
             <div>
               <h1>Error al mostrar los productos.</h1>
