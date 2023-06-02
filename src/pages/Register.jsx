@@ -6,15 +6,15 @@ import {
   Input,
   Stack,
   Link,
+  Icon,
   InputGroup,
   InputRightElement,
-  Icon,
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { Link as RouterLink } from 'react-router-dom'
 
-export function Login() {
+export function Register() {
   {
     /*Seter para mostrar/ocultar contraseña*/
   }
@@ -23,7 +23,7 @@ export function Login() {
 
   return (
     <Stack alignItems="left" minW="20%" pt="70px" gap={7}>
-      <Heading>Iniciar Sesion</Heading>
+      <Heading>Crear cuenta</Heading>
       <Button>
         <Icon boxSize={8}>
           <FcGoogle />
@@ -47,10 +47,10 @@ export function Login() {
             </Button>
           </InputRightElement>
         </InputGroup>
-        <Button width="100%">Iniciar sesion</Button>
+        <Button width="100%">Crear cuenta</Button>
       </FormControl>
-      <Link as={RouterLink} to="/register" textAlign="center">
-        ¿No tenés cuenta? Crear cuenta
+      <Link as={RouterLink} to="/login" textAlign="center">
+        ¿Ya tenés cuenta? Iniciar sesión
       </Link>
     </Stack>
   )
