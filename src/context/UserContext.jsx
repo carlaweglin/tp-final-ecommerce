@@ -16,8 +16,7 @@ const [user, setUser] = useState()
           
           setUser(user)
         } else {
-          // User is signed out
-          // ...
+          setUser()
           
         }
       });

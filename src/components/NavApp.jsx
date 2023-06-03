@@ -1,15 +1,33 @@
-import { Button, HStack, Link } from '@chakra-ui/react'
-import { useContext } from 'react'
+import {
+  Button,
+  HStack,
+  Link,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  
+} from '@chakra-ui/react'
+import { useContext, useEffect, useState } from 'react'
 
 import { Link as RouterLink } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
+import { signOut } from 'firebase/auth'
+import { auth } from '../firebase/config'
+
 
 export function NavApp() {
-  
-  const user = useContext(UserContext)
-
-
-console.log(user);
+  let user = useContext(UserContext)
+  const [asd, setasd] = useState(false)
+  const userSignOut = () => {
+    setasd(!asd)
+    try {
+      signOut(auth)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  console.log('user:', user)
 
   return (
     <HStack w="100%" justifyContent="center" gap={100}>
@@ -20,9 +38,21 @@ console.log(user);
         <Button colorScheme="blackAlpha">Productos</Button>
       </Link>
       <Button colorScheme="blackAlpha">Carrito</Button>
-      <Link as={RouterLink} to="/login">
-        <Button colorScheme="blackAlpha">{(user !== undefined) ? `Hola! ${user.email}` : 'Iniciar sesion'}</Button>
-      </Link>
+      {user !== undefined ? (
+        // <Button onClick={userSignOut}>{`Hola! ${user?.email}`}</Button>
+        <Menu>
+          <MenuButton as={Button} >
+            {`Hola! ${user?.email}`}
+          </MenuButton>
+          <MenuList>
+            <MenuItem onClick={userSignOut}>Cerrar sesión</MenuItem>
+          </MenuList>
+        </Menu>
+      ) : (
+        <Link as={RouterLink} to="/login">
+          <Button colorScheme="blackAlpha">Iniciar Sesión</Button>
+        </Link>
+      )}
     </HStack>
   )
 }
