@@ -140,14 +140,7 @@ export function Register() {
       <Link as={RouterLink} to="/login" textAlign="center">
         ¿Ya tenés cuenta? Iniciar sesión
       </Link>
-      {user !== undefined &&
-        toast({
-          title: 'Cuenta creada',
-          description: 'Seras redirigido a la pagina de inicio',
-          status: 'success',
-          duration: 9000,
-          isClosable: true,
-        })}
+      
     </Stack>
   )
 }

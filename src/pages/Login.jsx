@@ -10,19 +10,66 @@ import {
   InputRightElement,
   Icon,
   Text,
+  useToast,
+  Spinner,
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { FcGoogle } from 'react-icons/fc'
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { signInUserWithEmailAndPassword } from '../services/auth'
 
 export function Login() {
-  const { register, handleSubmit, formState } = useForm()
-
+  const [loginLoader, setLoginLoader] = useState(false)
+  const { register, handleSubmit, formState, reset } = useForm()
   const { errors } = formState
+  const [user, setUser] = useState()
+  const [error, setError] = useState()
+  const toast = useToast()
+  const navigate = useNavigate()
 
   const login = (data) => {
-    console.log(data)
+    const signInUser = async () => {
+      setLoginLoader(true)
+      try {
+        const { user, errorMessage } = await signInUserWithEmailAndPassword(
+          data
+        )
+        if (user) {
+          setUser(user)
+          toast({
+            title: 'Sesión iniciada',
+            description: 'Sesión iniciada con éxito!',
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          })
+          navigate('/')
+        } else {
+          setError(errorMessage)
+          toast({
+            title: 'Hubo un error al iniciar sesión',
+            description: 'Usuario o contraseña incorrectos',
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
+        }
+      } catch (error) {
+        setError(error)
+        toast({
+          title: 'Intente en unos minutos',
+          description: error,
+          status: 'warning',
+          duration: 9000,
+          isClosable: true,
+        })
+      } finally {
+        setLoginLoader(false)
+        reset()
+      }
+    }
+    signInUser()
   }
 
   {
@@ -83,7 +130,7 @@ export function Login() {
             {errors.password?.message}
           </Text>
           <Button width="100%" type="submit" mt="30px">
-            Iniciar sesion
+            {loginLoader ? <Spinner size="md" /> : 'Iniciar Sesión'}
           </Button>
         </FormControl>
       </form>
