@@ -1,9 +1,10 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../firebase/config'
+import { useState } from 'react'
 
 export const registerUserWithEmailAndPassword = async (data) => {
   const { email, password } = data
-
+  let user,errorMessage;
   try {
     const userCredential = await createUserWithEmailAndPassword(
       auth,
@@ -11,10 +12,12 @@ export const registerUserWithEmailAndPassword = async (data) => {
       password
     )
 
-    const user = userCredential.user
-    return user
+    user = userCredential.user
   } catch (error) {
-    const errorCode = error.code
-    const errorMessage = error.message
+    errorMessage = error.message
+  }
+  finally {
+    const response = {user,errorMessage}
+    return response
   }
 }

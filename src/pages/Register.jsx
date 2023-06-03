@@ -10,30 +10,66 @@ import {
   InputGroup,
   InputRightElement,
   Text,
+  Spinner,
+  useToast,
 } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { FcGoogle } from 'react-icons/fc'
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink, useNavigate } from 'react-router-dom'
 import { registerUserWithEmailAndPassword } from '../services/auth'
 
 export function Register() {
-  const { register, handleSubmit, formState } = useForm()
-  const [loginLoader,setLoginLoader] = useState(false)
+  const [loginLoader, setLoginLoader] = useState(false)
+  const [user, setUser] = useState()
+  const [error, setError] = useState()
+  const { register, handleSubmit, formState, reset } = useForm()
   const { errors } = formState
+  const toast = useToast()
+  const navigate = useNavigate()
 
   const login = (data) => {
     const registerUser = async () => {
-        setLoginLoader(true)
-        try {
-          const user = await registerUserWithEmailAndPassword(data)
-        } catch (error) {
-          console.log("sasd");
-        } finally {
-            setLoginLoader(false)
+      setLoginLoader(true)
+      try {
+        const { user, errorMessage } = await registerUserWithEmailAndPassword(
+          data
+        )
+        if (user) {
+          setUser(user)
+          toast({
+            title: 'Cuenta creada',
+            description: 'Seras redirigido a la pagina de inicio',
+            status: 'success',
+            duration: 9000,
+            isClosable: true,
+          })
+          navigate('/')
+        } else {
+          setError(errorMessage)
+          toast({
+            title: 'Hubo un error al crear cuenta',
+            description: errorMessage,
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
         }
+      } catch (error) {
+        setError(error)
+        toast({
+            title: 'Intente en unos minutos',
+            description: error,
+            status: 'warning',
+            duration: 9000,
+            isClosable: true,
+          })
+      } finally {
+        setLoginLoader(false)
+        reset()
       }
-      registerUser()
+    }
+    registerUser()
   }
 
   {
@@ -97,13 +133,21 @@ export function Register() {
             {errors.password?.message}
           </Text>
           <Button width="100%" type="submit" mt="30px">
-             {loginLoader ? "verdadero" : "falso"  }
+            {loginLoader ? <Spinner size="md" /> : 'Crear cuenta'}
           </Button>
         </FormControl>
       </form>
       <Link as={RouterLink} to="/login" textAlign="center">
         ¿Ya tenés cuenta? Iniciar sesión
       </Link>
+      {user !== undefined &&
+        toast({
+          title: 'Cuenta creada',
+          description: 'Seras redirigido a la pagina de inicio',
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+        })}
     </Stack>
   )
 }
