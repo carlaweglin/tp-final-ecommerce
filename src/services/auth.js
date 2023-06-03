@@ -12,12 +12,9 @@ export const registerUserWithEmailAndPassword = async (data) => {
     )
 
     const user = userCredential.user
-
     return user
   } catch (error) {
     const errorCode = error.code
     const errorMessage = error.message
   }
-
-  
 }

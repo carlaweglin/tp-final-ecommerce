@@ -13,10 +13,11 @@ import { getAllProducts } from '../services/products'
 
 export function Home() {
   const [products, setProducts] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   useEffect(() => {
     const getData = async () => {
+      setLoading(true)
       try {
         const products = await getAllProducts()
         setProducts(products)

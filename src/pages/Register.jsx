@@ -11,7 +11,7 @@ import {
   InputRightElement,
   Text,
 } from '@chakra-ui/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { FcGoogle } from 'react-icons/fc'
 import { Link as RouterLink } from 'react-router-dom'
@@ -19,11 +19,21 @@ import { registerUserWithEmailAndPassword } from '../services/auth'
 
 export function Register() {
   const { register, handleSubmit, formState } = useForm()
-
+  const [loginLoader,setLoginLoader] = useState(false)
   const { errors } = formState
 
   const login = (data) => {
-    registerUserWithEmailAndPassword(data)
+    const registerUser = async () => {
+        setLoginLoader(true)
+        try {
+          const user = await registerUserWithEmailAndPassword(data)
+        } catch (error) {
+          console.log("sasd");
+        } finally {
+            setLoginLoader(false)
+        }
+      }
+      registerUser()
   }
 
   {
@@ -87,7 +97,7 @@ export function Register() {
             {errors.password?.message}
           </Text>
           <Button width="100%" type="submit" mt="30px">
-            Crear cuenta
+             {loginLoader ? "verdadero" : "falso"  }
           </Button>
         </FormControl>
       </form>
