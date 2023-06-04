@@ -8,7 +8,8 @@ import { ProductDetails } from './pages/ProductDetails';
 import { Login } from './pages/Login';
 import { Register } from "./pages/Register";
 import { Checkout } from './pages/CheckOut';
-import { ProtectedRoutChechout } from './components/ProtectedRoutCheckout';
+import { ProtectedRoutCheckout } from './components/ProtectedRoutCheckout';
+import { Cart } from './components/Cart';
 
 
 function App() {
@@ -23,8 +24,9 @@ function App() {
         <Route path='/products/:id' element={<ProductDetails/>} />
         <Route path='/login' element={<Login/>} />
         <Route path='/register' element={<Register/>} />
+        <Route path='/cart' element={<Cart/>} />
         <Route path='*' element={<Error404/>} />
-        <Route path='/checkout' element={<ProtectedRoutChechout><Checkout/></ProtectedRoutChechout>}/>
+        <Route path='/checkout' element={<ProtectedRoutCheckout><Checkout/></ProtectedRoutCheckout>}/>
       </Routes>
     </AppLayout>
   )

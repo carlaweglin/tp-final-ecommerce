@@ -1,26 +1,23 @@
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth'
 import { createContext, useState } from 'react'
-import { auth } from '../firebase/config';
+import { auth } from '../firebase/config'
 
 export const UserContext = createContext()
 
-export const UserProvider = ({ children }) => {
+export const UserProvider =  ({ children }) => {
+  const [user, setUser] = useState("pending")
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid
+      // ...
 
-const [user, setUser] = useState()    
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-          // User is signed in, see docs for a list of available properties
-          // https://firebase.google.com/docs/reference/js/firebase.User
-          const uid = user.uid;
-          // ...
-          
-          setUser(user)
-        } else {
-          setUser()
-          
-        }
-      });
-
+      setUser(user)
+    } else {
+      setUser()
+    }
+  })
 
   return <UserContext.Provider value={user}>{children}</UserContext.Provider>
 }

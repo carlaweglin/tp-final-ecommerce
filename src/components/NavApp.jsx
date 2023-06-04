@@ -1,49 +1,53 @@
 import {
   Button,
   HStack,
+  Icon,
   Link,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
-  Text,
-  
 } from '@chakra-ui/react'
-import { useContext, useEffect, useState } from 'react'
-
+import { useContext } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 import { signOut } from 'firebase/auth'
 import { auth } from '../firebase/config'
-
+import { DrawerCart } from './DrawerCart'
 
 export function NavApp() {
   let user = useContext(UserContext)
-  const [asd, setasd] = useState(false)
+
   const userSignOut = () => {
-    setasd(!asd)
     try {
       signOut(auth)
     } catch (error) {
       console.log(error)
     }
   }
-  
 
   return (
-    <HStack w="100%" justifyContent="center" gap={100}>
+    <HStack
+      w="100%"
+      justifyContent="center"
+      gap={10}
+      flexWrap={{ base: 'wrap', md: 'nowrap' }}
+    >
       <Link as={RouterLink} to="/">
-      <Text as='b'>Inicio</Text>
+        <Button colorScheme="yellow" variant="ghost">
+          Inicio
+        </Button>
       </Link>
       <Link as={RouterLink} to="/products">
-      <Text as='b'>Productos</Text>
+        <Button colorScheme="yellow" variant="ghost">
+          Productos
+        </Button>
       </Link>
-      <Button colorScheme="blackAlpha">Carrito</Button>
+      <DrawerCart/>
       {user !== undefined ? (
-        // <Button onClick={userSignOut}>{`Hola! ${user?.email}`}</Button>
         <Menu>
-          <MenuButton as={Button} >
-            {`Hola! ${user?.email}`}
+          <MenuButton as={Button} colorScheme="yellow" variant="ghost">
+            Mi cuenta
           </MenuButton>
           <MenuList>
             <MenuItem onClick={userSignOut}>Cerrar sesión</MenuItem>

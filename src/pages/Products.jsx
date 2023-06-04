@@ -17,7 +17,7 @@ import {
 } from '@chakra-ui/react'
 import { ProductCard } from '../components/ProductCard'
 import { useEffect, useState } from 'react'
-import { getAllProducts } from '../services/products'
+import { getAllProducts, getProductsWithFilter } from '../services/products'
 
 export function Products() {
   const [products, setProducts] = useState([])

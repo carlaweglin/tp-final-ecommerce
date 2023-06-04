@@ -45,5 +45,5 @@ export const getProductsWithFilter = async (name) => {
     ...doc.data(),
   }))
 
-  return products;
+  return products
 }

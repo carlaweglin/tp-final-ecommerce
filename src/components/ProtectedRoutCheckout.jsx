@@ -1,15 +1,21 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { UserContext } from '../context/UserContext'
 import { Navigate } from 'react-router-dom'
 
-export const ProtectedRoutChechout = ({ children }) => {
-  const user = useContext(UserContext)
+export const ProtectedRoutCheckout =  ({ children }) => {
+  let user = useContext(UserContext)
 
-  console.log(user);
+ 
 
-  if (user === undefined) {
-    return <Navigate to="/login" replace />
+  console.log("user:",user);
+
+  if (user !== "pending") {
+      if (user === undefined) {
+        return <Navigate to="/login" replace />
+      }
   }
+
+
 
   return children
 }
