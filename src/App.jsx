@@ -7,6 +7,8 @@ import { Products } from './pages/Products';
 import { ProductDetails } from './pages/ProductDetails';
 import { Login } from './pages/Login';
 import { Register } from "./pages/Register";
+import { Checkout } from './pages/CheckOut';
+import { ProtectedRoutChechout } from './components/ProtectedRoutCheckout';
 
 
 function App() {
@@ -22,6 +24,7 @@ function App() {
         <Route path='/login' element={<Login/>} />
         <Route path='/register' element={<Register/>} />
         <Route path='*' element={<Error404/>} />
+        <Route path='/checkout' element={<ProtectedRoutChechout><Checkout/></ProtectedRoutChechout>}/>
       </Routes>
     </AppLayout>
   )

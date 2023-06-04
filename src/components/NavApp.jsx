@@ -36,7 +36,7 @@ export function NavApp() {
       <Text as='b'>Inicio</Text>
       </Link>
       <Link as={RouterLink} to="/products">
-        <Button colorScheme="blackAlpha">Productos</Button>
+      <Text as='b'>Productos</Text>
       </Link>
       <Button colorScheme="blackAlpha">Carrito</Button>
       {user !== undefined ? (
