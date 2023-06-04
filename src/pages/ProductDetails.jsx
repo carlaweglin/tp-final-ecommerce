@@ -14,6 +14,7 @@ import {
 import { Link as RouterLink, useParams } from 'react-router-dom'
 import { getProductById } from '../services/products'
 import { useEffect, useState } from 'react'
+import { addProductToCart } from '../utils/addProductToCart'
 
 export function ProductDetails() {
   const { id } = useParams()
@@ -26,6 +27,7 @@ export function ProductDetails() {
     const getData = async () => {
       try {
         const product = await getProductById(id)
+        product.id = id
         setProduct(product)
       } catch (error) {
         setError(true)
@@ -66,10 +68,10 @@ export function ProductDetails() {
           </CardBody>
 
           <CardFooter gap={5}>
-            <Button variant="solid" colorScheme="blue">
+            <Button variant="solid" colorScheme="blue" onClick={() => addProductToCart(product)}>
               Agregar al carrito
             </Button>
-            <Link as={RouterLink} to="/">
+            <Link as={RouterLink} to="/products">
               <Button variant="solid" colorScheme="blue">
                 Volver atrás
               </Button>

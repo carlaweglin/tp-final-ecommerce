@@ -11,21 +11,16 @@ import {
   Text,
   Link,
 } from '@chakra-ui/react'
-import { wrap } from 'framer-motion';
 import { Link as RouterLink } from 'react-router-dom'
+import { addProductToCart } from '../utils/addProductToCart'
 
-export function ProductCard({product}) {
-  
-  const {name,image,description,price,id} = product;
+export function ProductCard({ product }) {
+  const { name, image, description, price, id } = product
 
   return (
     <Card maxW="350px">
       <CardBody>
-        <Image
-          src={image}
-          alt="producto"
-          borderRadius="lg"
-        />
+        <Image src={image} alt="producto" borderRadius="lg" />
         <Stack mt="6" spacing="3">
           <Heading size="md">{name}</Heading>
           <Text size="sm">{description}</Text>
@@ -37,17 +32,20 @@ export function ProductCard({product}) {
       </CardBody>
       <Divider />
       <CardFooter>
-        <ButtonGroup flexWrap='wrap' spacing="3">
+        <ButtonGroup flexWrap="wrap" spacing="3">
           <Link as={RouterLink} to={`/products/${id}`}>
             <Button variant="solid" colorScheme="blue">
               Ver detalles
             </Button>
           </Link>
-          <Link as={RouterLink} to="/cart">
-            <Button variant="ghost" colorScheme="blue">
-              Agregar al carrito
-            </Button>
-          </Link>
+
+          <Button
+            variant="ghost"
+            colorScheme="blue"
+            onClick={() => addProductToCart(product)}
+          >
+            Agregar al carrito
+          </Button>
         </ButtonGroup>
       </CardFooter>
     </Card>
