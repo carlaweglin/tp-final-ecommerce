@@ -10,6 +10,7 @@ import {
   Text,
   Link,
   Spinner,
+  useToast,
 } from '@chakra-ui/react'
 import { Link as RouterLink, useParams } from 'react-router-dom'
 import { getProductById } from '../services/products'
@@ -18,10 +19,10 @@ import { addProductToCart } from '../utils/addProductToCart'
 
 export function ProductDetails() {
   const { id } = useParams()
-
   const [product, setProduct] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+  const toast = useToast()
 
   useEffect(() => {
     const getData = async () => {
@@ -35,7 +36,7 @@ export function ProductDetails() {
         setLoading(false)
       }
     }
-    
+
     getData()
   }, [])
 
@@ -54,7 +55,7 @@ export function ProductDetails() {
         />
 
         <Stack>
-        {error && (
+          {error && (
             <div>
               <h1>Error al mostrar los productos.</h1>
             </div>
@@ -68,7 +69,19 @@ export function ProductDetails() {
           </CardBody>
 
           <CardFooter gap={5}>
-            <Button variant="solid" colorScheme="blue" onClick={() => addProductToCart(product)}>
+            <Button
+              variant="solid"
+              colorScheme="blue"
+              onClick={() => {
+                addProductToCart(product)
+                toast({
+                  title: 'Producto agregado',
+                  status: 'success',
+                  duration: 5000,
+                  isClosable: true,
+                })
+              }}
+            >
               Agregar al carrito
             </Button>
             <Link as={RouterLink} to="/products">

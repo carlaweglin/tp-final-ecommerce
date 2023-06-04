@@ -10,11 +10,14 @@ import {
   Stack,
   Text,
   Link,
+  useToast,
 } from '@chakra-ui/react'
+
 import { Link as RouterLink } from 'react-router-dom'
 import { addProductToCart } from '../utils/addProductToCart'
 
 export function ProductCard({ product }) {
+  const toast = useToast()
   const { name, image, description, price, id } = product
 
   return (
@@ -42,7 +45,15 @@ export function ProductCard({ product }) {
           <Button
             variant="ghost"
             colorScheme="blue"
-            onClick={() => addProductToCart(product)}
+            onClick={() => {
+              addProductToCart(product)
+              toast({
+                title: 'Producto agregado',
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+              })
+            }}
           >
             Agregar al carrito
           </Button>
