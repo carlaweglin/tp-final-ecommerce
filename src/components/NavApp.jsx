@@ -6,6 +6,7 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Text,
   
 } from '@chakra-ui/react'
 import { useContext, useEffect, useState } from 'react'
@@ -27,12 +28,12 @@ export function NavApp() {
       console.log(error)
     }
   }
-  console.log('user:', user)
+  
 
   return (
     <HStack w="100%" justifyContent="center" gap={100}>
       <Link as={RouterLink} to="/">
-        <Button colorScheme="blackAlpha">Inicio</Button>
+      <Text as='b'>Inicio</Text>
       </Link>
       <Link as={RouterLink} to="/products">
         <Button colorScheme="blackAlpha">Productos</Button>

@@ -44,7 +44,7 @@ export function Products() {
       <Stack mb="20px">
         <Heading as="h2">Productos</Heading>
       </Stack>
-      <HStack w="100%">
+      <HStack w="100%" flexWrap={{base:'wrap',md:'nowrap'}}>
         <FormControl>
           <FormLabel>Nombre</FormLabel>
           <Input type="text" />
@@ -80,7 +80,7 @@ export function Products() {
           </div>
         )}
         {loading && <Spinner size="xl" />}
-        <SimpleGrid columns={[2, null, 3]} gap={12}>
+        <SimpleGrid columns={{ sm:1, md: 2, lg: 3 }} gap={12}>
           {products.map((product) => (
             <ProductCard product={product} key={product.id} />
           ))}

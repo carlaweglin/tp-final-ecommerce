@@ -11,6 +11,7 @@ import {
   Text,
   Link,
 } from '@chakra-ui/react'
+import { wrap } from 'framer-motion';
 import { Link as RouterLink } from 'react-router-dom'
 
 export function ProductCard({product}) {
@@ -36,7 +37,7 @@ export function ProductCard({product}) {
       </CardBody>
       <Divider />
       <CardFooter>
-        <ButtonGroup spacing="2">
+        <ButtonGroup flexWrap='wrap' spacing="3">
           <Link as={RouterLink} to={`/products/${id}`}>
             <Button variant="solid" colorScheme="blue">
               Ver detalles

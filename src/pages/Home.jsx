@@ -6,6 +6,7 @@ import {
   Spinner,
   Stack,
   Text,
+  VStack,
 } from '@chakra-ui/react'
 import { ProductCard } from '../components/ProductCard'
 import { useEffect, useState } from 'react'
@@ -32,7 +33,7 @@ export function Home() {
   }, [])
 
   return (
-    <Stack alignItems="center" w="80%" pb="20px">
+    <VStack alignItems="center"  pb="20px" w='100%' >
       <Box
         bg="rgb(242, 206, 130)"
         w="70%"
@@ -66,13 +67,13 @@ export function Home() {
             </div>
           )}
           {loading && <Spinner size="xl" />}
-          <SimpleGrid columns={[2, null, 3]} gap={10}>
+          <SimpleGrid columns={{ sm:1, md: 2, lg: 3 }} gap={10}>
             {products.map((product) => (
               <ProductCard product={product} key={product.id} />
             ))}
           </SimpleGrid>
         </Stack>
       </Box>
-    </Stack>
+    </VStack>
   )
 }
