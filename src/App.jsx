@@ -7,7 +7,7 @@ import { Products } from './pages/Products';
 import { ProductDetails } from './pages/ProductDetails';
 import { Login } from './pages/Login';
 import { Register } from "./pages/Register";
-import { Checkout } from './pages/CheckOut';
+import { Checkout } from './pages/Checkout';
 import { ProtectedRoutCheckout } from './components/ProtectedRoutCheckout';
 import { Cart } from './components/Cart';
 
