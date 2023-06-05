@@ -55,7 +55,7 @@ export function NavApp() {
         </Menu>
       ) : (
         <Link as={RouterLink} to="/login">
-          <Button colorScheme="blackAlpha">Iniciar Sesión</Button>
+          <Button colorScheme="yellow" variant="ghost">Iniciar Sesión</Button>
         </Link>
       )}
     </HStack>

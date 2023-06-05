@@ -81,12 +81,7 @@ export function Login() {
   return (
     <Stack alignItems="left" minW="20%" pt="70px" gap={7}>
       <Heading>Iniciar Sesion</Heading>
-      <Button>
-        <Icon boxSize={8}>
-          <FcGoogle />
-        </Icon>
-        Registrarse con Google
-      </Button>
+      
       <form onSubmit={handleSubmit(login)}>
         <FormControl>
           <FormLabel>Email</FormLabel>
@@ -136,6 +131,9 @@ export function Login() {
       </form>
       <Link as={RouterLink} to="/register" textAlign="center">
         ¿No tenés cuenta? Crear cuenta
+      </Link>
+      <Link as={RouterLink} to="/" textAlign="center">
+        Volver al inicio
       </Link>
     </Stack>
   )

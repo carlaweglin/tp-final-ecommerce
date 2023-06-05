@@ -15,7 +15,6 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { FcGoogle } from 'react-icons/fc'
 import { Link as RouterLink, useNavigate } from 'react-router-dom'
 import { registerUserWithEmailAndPassword } from '../services/auth'
 
@@ -85,12 +84,7 @@ export function Register() {
   return (
     <Stack alignItems="left" minW="20%" pt="70px" gap={7}>
       <Heading>Crear cuenta</Heading>
-      <Button>
-        <Icon boxSize={8}>
-          <FcGoogle />
-        </Icon>
-        Registrarse con Google
-      </Button>
+      
       <form onSubmit={handleSubmit(login)}>
         <FormControl>
           <FormLabel>Email</FormLabel>
@@ -139,6 +133,9 @@ export function Register() {
       </form>
       <Link as={RouterLink} to="/login" textAlign="center">
         ¿Ya tenés cuenta? Iniciar sesión
+      </Link>
+      <Link as={RouterLink} to="/" textAlign="center">
+        Volver al inicio
       </Link>
       
     </Stack>

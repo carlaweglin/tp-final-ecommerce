@@ -7,7 +7,7 @@ export const ProtectedRoutCheckout =  ({ children }) => {
 
  
 
-  console.log("user:",user);
+  
 
   if (user !== "pending") {
       if (user === undefined) {

@@ -6,6 +6,7 @@ import {
   startAt,
   endAt,
   orderBy,
+  addDoc,
 } from 'firebase/firestore'
 import { db } from '../firebase/config'
 
@@ -46,4 +47,9 @@ export const getProductsWithFilter = async (name) => {
   }))
 
   return products
+}
+
+export const addOrder = async (request) => {
+  // Add a new document with a generated id.
+const docRef = await addDoc(collection(db, "orders"), request);
 }

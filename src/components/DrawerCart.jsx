@@ -13,24 +13,25 @@ import {
   Text,
   Card,
   CardBody,
-  Stack,
   Heading,
   Image,
   HStack,
+  useToast,
 } from '@chakra-ui/react'
 import { BsCartCheck } from 'react-icons/bs'
 import { DeleteIcon } from '@chakra-ui/icons'
 import { Link as RouterLink } from 'react-router-dom'
-import React from 'react'
+import React, { useState } from 'react'
 import { totalOrder } from '../utils/totalOrder'
 import { deleteProductCart } from '../utils/deleteProductCart'
 
 export function DrawerCart() {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
+  const[updateCart,setUpdateCart] = useState(true)
   let products = JSON.parse(localStorage.getItem('products')) || []
   const price = totalOrder(products)
-  console.log(products);
+  const toast = useToast()
   return (
     <>
       <Button
@@ -56,7 +57,7 @@ export function DrawerCart() {
 
           <DrawerBody>
             {!products.length && <Text>No hay productos en el carrito!</Text>}
-            {(products.length) &&
+            {products.length ?
               products.map((product) => (
                 <Card key={product.id}>
                   <CardBody>
@@ -67,15 +68,31 @@ export function DrawerCart() {
                         src={product.image}
                         alt={product.name}
                       />
-                      <Heading size='sm'>{product.name}</Heading>
-                      <Button  size='sm' onClick={() => deleteProductCart(product.id)}><DeleteIcon /></Button>
+                      <Heading size="sm">{product.name}</Heading>
+                      <Button
+                        size="sm"
+                        onClick={() => {
+                          deleteProductCart(product.id),
+                          setUpdateCart(!updateCart)
+                          toast({
+                            title: 'Producto eliminado',
+                            status: 'error',
+                            duration: 5000,
+                            isClosable: true,
+                          })
+                        }}
+                      >
+                        <DeleteIcon />
+                      </Button>
                     </HStack>
                   </CardBody>
-                  <Text textAlign='center'>{`${product.quantity} x $${product.price}`}</Text>
+                  <Text textAlign="center">{`${product.quantity} x $${product.price}`}</Text>
                 </Card>
-              ))}
+              ))
+              :
+              ""}
           </DrawerBody>
-          {products.length && (
+          {products.length ? (
             <>
               <DrawerFooter>
                 <Heading textAlign="left">{`Total: $ ${price}`}</Heading>
@@ -96,7 +113,9 @@ export function DrawerCart() {
                 </Link>
               </DrawerFooter>
             </>
-          )}
+          )
+        :
+        ""}
         </DrawerContent>
       </Drawer>
     </>
