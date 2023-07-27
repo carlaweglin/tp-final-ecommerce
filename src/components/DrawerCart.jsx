@@ -36,13 +36,10 @@ export function DrawerCart() {
     <>
       <Button
         ref={btnRef}
-        colorScheme="yellow"
         variant="ghost"
         onClick={onOpen}
       >
-        <Icon boxSize={8}>
-          <BsCartCheck />
-        </Icon>
+        🛒
       </Button>
       <Drawer
         isOpen={isOpen}

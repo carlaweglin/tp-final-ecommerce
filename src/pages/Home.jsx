@@ -33,15 +33,16 @@ export function Home() {
   }, [])
 
   return (
-    <VStack alignItems="center"  pb="20px" w='100%' >
+    <VStack alignItems="center" pb="20px" w="100%" >
       <Box
-        bg="rgb(242, 206, 130)"
+        bg="#FFFAF0"
         w="70%"
         color="white"
         textAlign="center"
         p="20px"
+      
       >
-        <Heading fontSize="30px">
+        <Heading fontSize="30px" color="black">
           Proyecto final ADAITW, un ecommerce para aprender y aplicar
           tecnologías web.
         </Heading>
@@ -67,7 +68,7 @@ export function Home() {
             </div>
           )}
           {loading && <Spinner size="xl" />}
-          <SimpleGrid columns={{ sm:1, md: 2, lg: 3 }} gap={10}>
+          <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} gap={10}>
             {products.map((product) => (
               <ProductCard product={product} key={product.id} />
             ))}

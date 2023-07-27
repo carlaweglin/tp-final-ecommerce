@@ -32,21 +32,22 @@ export function NavApp() {
       justifyContent="center"
       gap={10}
       flexWrap={{ base: 'wrap', md: 'nowrap' }}
+      
     >
       <Link as={RouterLink} to="/">
-        <Button colorScheme="yellow" variant="ghost">
+        <Button  variant="ghost" color="black">
           Inicio
         </Button>
       </Link>
       <Link as={RouterLink} to="/products">
-        <Button colorScheme="yellow" variant="ghost">
+        <Button variant="ghost">
           Productos
         </Button>
       </Link>
       <DrawerCart/>
       {user !== undefined ? (
         <Menu>
-          <MenuButton as={Button} colorScheme="yellow" variant="ghost">
+          <MenuButton as={Button} variant="ghost">
             Mi cuenta
           </MenuButton>
           <MenuList>
@@ -55,7 +56,7 @@ export function NavApp() {
         </Menu>
       ) : (
         <Link as={RouterLink} to="/login">
-          <Button colorScheme="yellow" variant="ghost">Iniciar Sesión</Button>
+          <Button variant="ghost">Iniciar Sesión</Button>
         </Link>
       )}
     </HStack>
